@@ -1,0 +1,250 @@
+=== GESTOR DE INVENTARIO (CON RACE CONDITION) ===
+Ejecución #4
+Timestamp: 1762124876
+PROBLEMA: Operaciones sobre inventario SIN sincronización
+
+Stock inicial:
+Producto 0: 100 unidades
+Producto 1: 100 unidades
+Producto 2: 100 unidades
+Producto 3: 100 unidades
+Producto 4: 100 unidades
+Producto 5: 100 unidades
+Producto 6: 100 unidades
+Producto 7: 100 unidades
+Producto 8: 100 unidades
+Producto 9: 100 unidades
+
+[Thread 4] Intentando vender 10 unidades del Producto 0
+[Thread 1] Intentando vender 10 unidades del Producto 0
+[Thread 6] Reabasteciendo 30 unidades del Producto 0
+[Thread 8] Reabasteciendo 30 unidades del Producto 0
+[Thread 9] Reabasteciendo 30 unidades del Producto 0
+[Thread 11] Intentando vender 15 unidades del Producto 5
+[Thread 12] Intentando vender 15 unidades del Producto 5
+[Thread 14] Intentando vender 15 unidades del Producto 5
+[Thread 16] Reabasteciendo 25 unidades del Producto 5
+[Thread 20] Reabasteciendo 25 unidades del Producto 5
+[Thread 16] ✓ Reabastecimiento completado: +25 unidades. Producto 5 ahora tiene: 125
+[Thread 19] Reabasteciendo 25 unidades del Producto 5
+[Thread 17] Reabasteciendo 25 unidades del Producto 5
+[Thread 2] Intentando vender 10 unidades del Producto 0
+[Thread 20] ✓ Reabastecimiento completado: +25 unidades. Producto 5 ahora tiene: 150
+[Thread 19] ✓ Reabastecimiento completado: +25 unidades. Producto 5 ahora tiene: 150
+[Thread 17] ✓ Reabastecimiento completado: +25 unidades. Producto 5 ahora tiene: 150
+[Thread 5] Intentando vender 10 unidades del Producto 0
+[Thread 4] ✓ Venta completada: -10 unidades. Producto 0 ahora tiene: 130
+[Thread 1] ✓ Venta completada: -10 unidades. Producto 0 ahora tiene: 130
+[Thread 6] ✓ Reabastecimiento completado: +30 unidades. Producto 0 ahora tiene: 120
+[Thread 8] ✓ Reabastecimiento completado: +30 unidades. Producto 0 ahora tiene: 120
+[Thread 5] ✓ Venta completada: -10 unidades. Producto 0 ahora tiene: 120
+[Thread 11] ✓ Venta completada: -15 unidades. Producto 5 ahora tiene: 150
+[Thread 12] ✓ Venta completada: -15 unidades. Producto 5 ahora tiene: 150
+[Thread 15] Intentando vender 15 unidades del Producto 5
+[Thread 14] ✓ Venta completada: -15 unidades. Producto 5 ahora tiene: 150
+[Thread 18] Reabasteciendo 25 unidades del Producto 5
+[Thread 3] Intentando vender 10 unidades del Producto 0
+[Thread 7] Reabasteciendo 30 unidades del Producto 0
+[Thread 2] ✓ Venta completada: -10 unidades. Producto 0 ahora tiene: 120
+[Thread 10] Reabasteciendo 30 unidades del Producto 0
+[Thread 13] Intentando vender 15 unidades del Producto 5
+[Thread 9] ✓ Reabastecimiento completado: +30 unidades. Producto 0 ahora tiene: 120
+[Thread 18] ✓ Reabastecimiento completado: +25 unidades. Producto 5 ahora tiene: 175
+[Thread 3] ✓ Venta completada: -10 unidades. Producto 0 ahora tiene: 150
+[Thread 15] ✓ Venta completada: -15 unidades. Producto 5 ahora tiene: 175
+[Thread 7] ✓ Reabastecimiento completado: +30 unidades. Producto 0 ahora tiene: 150
+[Thread 13] ✓ Venta completada: -15 unidades. Producto 5 ahora tiene: 120
+[Thread 10] ✓ Reabastecimiento completado: +30 unidades. Producto 0 ahora tiene: 150
+[Thread 16] Reabasteciendo 30 unidades del Producto 6
+[Thread 17] Reabasteciendo 30 unidades del Producto 6
+[Thread 12] Intentando vender 20 unidades del Producto 6
+[Thread 9] Reabasteciendo 20 unidades del Producto 1
+[Thread 15] Intentando vender 20 unidades del Producto 6
+[Thread 10] Reabasteciendo 20 unidades del Producto 1
+[Thread 17] ✓ Reabastecimiento completado: +30 unidades. Producto 6 ahora tiene: 130
+[Thread 5] Intentando vender 15 unidades del Producto 1
+[Thread 11] Intentando vender 20 unidades del Producto 6
+[Thread 14] Intentando vender 20 unidades del Producto 6
+[Thread 10] ✓ Reabastecimiento completado: +20 unidades. Producto 1 ahora tiene: 120
+[Thread 18] Reabasteciendo 30 unidades del Producto 6
+[Thread 3] Intentando vender 15 unidades del Producto 1
+[Thread 7] Reabasteciendo 20 unidades del Producto 1
+[Thread 13] Intentando vender 20 unidades del Producto 6
+[Thread 20] Reabasteciendo 30 unidades del Producto 6
+[Thread 19] Reabasteciendo 30 unidades del Producto 6
+[Thread 4] Intentando vender 15 unidades del Producto 1
+[Thread 7] ✓ Reabastecimiento completado: +20 unidades. Producto 1 ahora tiene: 105
+[Thread 13] ✓ Venta completada: -20 unidades. Producto 6 ahora tiene: 90
+[Thread 12] ✓ Venta completada: -20 unidades. Producto 6 ahora tiene: 140
+[Thread 6] Reabasteciendo 20 unidades del Producto 1
+[Thread 8] Reabasteciendo 20 unidades del Producto 1
+[Thread 15] ✓ Venta completada: -20 unidades. Producto 6 ahora tiene: 140
+[Thread 9] ✓ Reabastecimiento completado: +20 unidades. Producto 1 ahora tiene: 90
+[Thread 2] Intentando vender 15 unidades del Producto 1
+[Thread 5] ✓ Venta completada: -15 unidades. Producto 1 ahora tiene: 90
+[Thread 11] ✓ Venta completada: -20 unidades. Producto 6 ahora tiene: 140
+[Thread 8] ✓ Reabastecimiento completado: +20 unidades. Producto 1 ahora tiene: 110
+[Thread 18] ✓ Reabastecimiento completado: +30 unidades. Producto 6 ahora tiene: 140
+[Thread 3] ✓ Venta completada: -15 unidades. Producto 1 ahora tiene: 110
+[Thread 1] Intentando vender 15 unidades del Producto 1
+[Thread 20] ✓ Reabastecimiento completado: +30 unidades. Producto 6 ahora tiene: 140
+[Thread 16] ✓ Reabastecimiento completado: +30 unidades. Producto 6 ahora tiene: 140
+[Thread 19] ✓ Reabastecimiento completado: +30 unidades. Producto 6 ahora tiene: 140
+[Thread 4] ✓ Venta completada: -15 unidades. Producto 1 ahora tiene: 75
+[Thread 6] ✓ Reabastecimiento completado: +20 unidades. Producto 1 ahora tiene: 75
+[Thread 14] ✓ Venta completada: -20 unidades. Producto 6 ahora tiene: 140
+[Thread 2] ✓ Venta completada: -15 unidades. Producto 1 ahora tiene: 75
+[Thread 1] ✓ Venta completada: -15 unidades. Producto 1 ahora tiene: 60
+[Thread 17] Reabasteciendo 15 unidades del Producto 7
+[Thread 10] Reabasteciendo 40 unidades del Producto 2
+[Thread 7] Reabasteciendo 40 unidades del Producto 2
+[Thread 13] Intentando vender 10 unidades del Producto 7
+[Thread 12] Intentando vender 10 unidades del Producto 7
+[Thread 17] ✓ Reabastecimiento completado: +15 unidades. Producto 7 ahora tiene: 115
+[Thread 10] ✓ Reabastecimiento completado: +40 unidades. Producto 2 ahora tiene: 140
+[Thread 7] ✓ Reabastecimiento completado: +40 unidades. Producto 2 ahora tiene: 140
+[Thread 15] Intentando vender 10 unidades del Producto 7
+[Thread 11] Intentando vender 10 unidades del Producto 7
+[Thread 20] Reabasteciendo 15 unidades del Producto 7
+[Thread 4] Intentando vender 20 unidades del Producto 2
+[Thread 2] Intentando vender 20 unidades del Producto 2
+[Thread 15] ✓ Venta completada: -10 unidades. Producto 7 ahora tiene: 95
+[Thread 16] Reabasteciendo 15 unidades del Producto 7
+[Thread 3] Intentando vender 20 unidades del Producto 2
+[Thread 19] Reabasteciendo 15 unidades del Producto 7
+[Thread 6] Reabasteciendo 40 unidades del Producto 2
+[Thread 14] Intentando vender 10 unidades del Producto 7
+[Thread 1] Intentando vender 20 unidades del Producto 2
+[Thread 13] ✓ Venta completada: -10 unidades. Producto 7 ahora tiene: 135
+[Thread 9] Reabasteciendo 40 unidades del Producto 2
+[Thread 12] ✓ Venta completada: -10 unidades. Producto 7 ahora tiene: 135
+[Thread 5] Intentando vender 20 unidades del Producto 2
+[Thread 8] Reabasteciendo 40 unidades del Producto 2
+[Thread 18] Reabasteciendo 15 unidades del Producto 7
+[Thread 11] ✓ Venta completada: -10 unidades. Producto 7 ahora tiene: 110
+[Thread 20] ✓ Reabastecimiento completado: +15 unidades. Producto 7 ahora tiene: 110
+[Thread 4] ✓ Venta completada: -20 unidades. Producto 2 ahora tiene: 80
+[Thread 8] ✓ Reabastecimiento completado: +40 unidades. Producto 2 ahora tiene: 200
+[Thread 16] ✓ Reabastecimiento completado: +15 unidades. Producto 7 ahora tiene: 125
+[Thread 3] ✓ Venta completada: -20 unidades. Producto 2 ahora tiene: 200
+[Thread 19] ✓ Reabastecimiento completado: +15 unidades. Producto 7 ahora tiene: 125
+[Thread 6] ✓ Reabastecimiento completado: +40 unidades. Producto 2 ahora tiene: 200
+[Thread 14] ✓ Venta completada: -10 unidades. Producto 7 ahora tiene: 125
+[Thread 1] ✓ Venta completada: -20 unidades. Producto 2 ahora tiene: 200
+[Thread 9] ✓ Reabastecimiento completado: +40 unidades. Producto 2 ahora tiene: 200
+[Thread 5] ✓ Venta completada: -20 unidades. Producto 2 ahora tiene: 200
+[Thread 18] ✓ Reabastecimiento completado: +15 unidades. Producto 7 ahora tiene: 125
+[Thread 2] ✓ Venta completada: -20 unidades. Producto 2 ahora tiene: 200
+[Thread 17] Reabasteciendo 40 unidades del Producto 8
+[Thread 8] Reabasteciendo 10 unidades del Producto 3
+[Thread 14] Intentando vender 25 unidades del Producto 8
+[Thread 15] Intentando vender 25 unidades del Producto 8
+[Thread 13] Intentando vender 25 unidades del Producto 8
+[Thread 12] Intentando vender 25 unidades del Producto 8
+[Thread 11] Intentando vender 25 unidades del Producto 8
+[Thread 15] ✓ Venta completada: -25 unidades. Producto 8 ahora tiene: 75
+[Thread 4] Intentando vender 5 unidades del Producto 3
+[Thread 13] ✓ Venta completada: -25 unidades. Producto 8 ahora tiene: 115
+[Thread 3] Intentando vender 5 unidades del Producto 3
+[Thread 19] Reabasteciendo 40 unidades del Producto 8
+[Thread 11] ✓ Venta completada: -25 unidades. Producto 8 ahora tiene: 50
+[Thread 9] Reabasteciendo 10 unidades del Producto 3
+[Thread 1] Intentando vender 5 unidades del Producto 3
+[Thread 5] Intentando vender 5 unidades del Producto 3
+[Thread 10] Reabasteciendo 10 unidades del Producto 3
+[Thread 9] ✓ Reabastecimiento completado: +10 unidades. Producto 3 ahora tiene: 115
+[Thread 2] Intentando vender 5 unidades del Producto 3
+[Thread 7] Reabasteciendo 10 unidades del Producto 3
+[Thread 17] ✓ Reabastecimiento completado: +40 unidades. Producto 8 ahora tiene: 90
+[Thread 8] ✓ Reabastecimiento completado: +10 unidades. Producto 3 ahora tiene: 125
+[Thread 2] ✓ Venta completada: -5 unidades. Producto 3 ahora tiene: 95
+[Thread 20] Reabasteciendo 40 unidades del Producto 8
+[Thread 16] Reabasteciendo 40 unidades del Producto 8
+[Thread 12] ✓ Venta completada: -25 unidades. Producto 8 ahora tiene: 90
+[Thread 6] Reabasteciendo 10 unidades del Producto 3
+[Thread 4] ✓ Venta completada: -5 unidades. Producto 3 ahora tiene: 110
+[Thread 20] ✓ Reabastecimiento completado: +40 unidades. Producto 8 ahora tiene: 130
+[Thread 19] ✓ Reabastecimiento completado: +40 unidades. Producto 8 ahora tiene: 130
+[Thread 6] ✓ Reabastecimiento completado: +10 unidades. Producto 3 ahora tiene: 120
+[Thread 18] Reabasteciendo 40 unidades del Producto 8
+[Thread 5] ✓ Venta completada: -5 unidades. Producto 3 ahora tiene: 120
+[Thread 10] ✓ Reabastecimiento completado: +10 unidades. Producto 3 ahora tiene: 120
+[Thread 14] ✓ Venta completada: -25 unidades. Producto 8 ahora tiene: 130
+[Thread 7] ✓ Reabastecimiento completado: +10 unidades. Producto 3 ahora tiene: 120
+[Thread 16] ✓ Reabastecimiento completado: +40 unidades. Producto 8 ahora tiene: 170
+[Thread 3] ✓ Venta completada: -5 unidades. Producto 3 ahora tiene: 120
+[Thread 1] ✓ Venta completada: -5 unidades. Producto 3 ahora tiene: 120
+[Thread 18] ✓ Reabastecimiento completado: +40 unidades. Producto 8 ahora tiene: 170
+[Thread 15] Intentando vender 15 unidades del Producto 9
+[Thread 3] Intentando vender 25 unidades del Producto 4
+[Thread 11] Intentando vender 15 unidades del Producto 9
+[Thread 8] Reabasteciendo 35 unidades del Producto 4
+[Thread 9] Reabasteciendo 35 unidades del Producto 4
+[Thread 12] Intentando vender 15 unidades del Producto 9
+[Thread 4] Intentando vender 25 unidades del Producto 4
+[Thread 19] Reabasteciendo 20 unidades del Producto 9
+[Thread 9] ✓ Reabastecimiento completado: +35 unidades. Producto 4 ahora tiene: 135
+[Thread 12] ✓ Venta completada: -15 unidades. Producto 9 ahora tiene: 70
+[Thread 20] Reabasteciendo 20 unidades del Producto 9
+[Thread 19] ✓ Reabastecimiento completado: +20 unidades. Producto 9 ahora tiene: 105
+[Thread 1] Intentando vender 25 unidades del Producto 4
+[Thread 15] ✓ Venta completada: -15 unidades. Producto 9 ahora tiene: 105
+[Thread 3] ✓ Venta completada: -25 unidades. Producto 4 ahora tiene: 110
+[Thread 11] ✓ Venta completada: -15 unidades. Producto 9 ahora tiene: 125
+[Thread 8] ✓ Reabastecimiento completado: +35 unidades. Producto 4 ahora tiene: 85
+[Thread 17] Reabasteciendo 20 unidades del Producto 9
+[Thread 14] Intentando vender 15 unidades del Producto 9
+[Thread 16] Reabasteciendo 20 unidades del Producto 9
+[Thread 2] Intentando vender 25 unidades del Producto 4
+[Thread 6] Reabasteciendo 35 unidades del Producto 4
+[Thread 5] Intentando vender 25 unidades del Producto 4
+[Thread 18] Reabasteciendo 20 unidades del Producto 9
+[Thread 10] Reabasteciendo 35 unidades del Producto 4
+[Thread 4] ✓ Venta completada: -25 unidades. Producto 4 ahora tiene: 60
+[Thread 7] Reabasteciendo 35 unidades del Producto 4
+[Thread 13] Intentando vender 15 unidades del Producto 9
+[Thread 20] ✓ Reabastecimiento completado: +20 unidades. Producto 9 ahora tiene: 145
+[Thread 1] ✓ Venta completada: -25 unidades. Producto 4 ahora tiene: 120
+[Thread 14] ✓ Venta completada: -15 unidades. Producto 9 ahora tiene: 165
+[Thread 17] ✓ Reabastecimiento completado: +20 unidades. Producto 9 ahora tiene: 165
+[Thread 16] ✓ Reabastecimiento completado: +20 unidades. Producto 9 ahora tiene: 165
+[Thread 13] ✓ Venta completada: -15 unidades. Producto 9 ahora tiene: 130
+[Thread 5] ✓ Venta completada: -25 unidades. Producto 4 ahora tiene: 95
+[Thread 6] ✓ Reabastecimiento completado: +35 unidades. Producto 4 ahora tiene: 95
+[Thread 18] ✓ Reabastecimiento completado: +20 unidades. Producto 9 ahora tiene: 130
+[Thread 10] ✓ Reabastecimiento completado: +35 unidades. Producto 4 ahora tiene: 95
+[Thread 7] ✓ Reabastecimiento completado: +35 unidades. Producto 4 ahora tiene: 95
+[Thread 2] ✓ Venta completada: -25 unidades. Producto 4 ahora tiene: 95
+
+=== REPORTE FINAL ===
+Tiempo de ejecución: 67ms
+
+Comparación Stock Final vs Esperado:
+Producto 0: 150 (esperado: 120) ✗
+  → Diferencia: 30 unidades
+Producto 1: 60 (esperado: 85) ✗
+  → Diferencia: -25 unidades
+Producto 2: 200 (esperado: 140) ✗
+  → Diferencia: 60 unidades
+Producto 3: 120 (esperado: 105) ✗
+  → Diferencia: 15 unidades
+Producto 4: 95 (esperado: 135) ✗
+  → Diferencia: -40 unidades
+Producto 5: 120 (esperado: 110) ✗
+  → Diferencia: 10 unidades
+Producto 6: 140 (esperado: 130) ✗
+  → Diferencia: 10 unidades
+Producto 7: 125 (esperado: 105) ✗
+  → Diferencia: 20 unidades
+Producto 8: 170 (esperado: 140) ✗
+  → Diferencia: 30 unidades
+Producto 9: 130 (esperado: 105) ✗
+  → Diferencia: 25 unidades
+
+¿Todos correctos? NO
+
+*** RACE CONDITION DETECTADA ***
+Las operaciones concurrentes sin sincronización causaron inconsistencias
+LÍNEAS CRÍTICAS:
+  - Línea de lectura: int stock_actual = inventario[producto_id]->stock;
+  - Línea de escritura: inventario[producto_id]->stock = stock_actual +/- cantidad;
